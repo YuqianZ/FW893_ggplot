@@ -136,6 +136,38 @@ plotData = ggplot(data=weatherData) +
 
 plot(plotData);
 
+#### Part 8: Scaling discrete values (dates) ###
+plotData = ggplot(data=weatherData) + 
+  geom_line(mapping=aes(x=dateYr, y=maxTemp),
+            color="palevioletred1") +
+  geom_line(mapping=aes(x=dateYr, y=minTemp),
+            color="aquamarine2") +
+  geom_smooth(mapping=aes(x=dateYr, y=avgTemp),
+              color="orange", 
+              method="loess",
+              linetype=4,
+              fill="lightblue") +
+  labs(title = "Temperature vs. Date",
+       subtitle = "Lansing, Michigan: 2016",
+       x = "Date",
+       y = "Temperature (F)") +
+  # size and color relate to the border, fill is the inside color 
+  theme(panel.background = element_rect(fill="grey25",
+                                        size=2, color="grey0"),
+        panel.grid.minor = element_line(color="grey50", linetype=4),
+        panel.grid.major = element_line(color="grey100"),
+        plot.background = element_rect(fill = "lightgreen"),
+        plot.title = element_text(hjust = 0.45),
+        plot.subtitle = element_text(hjust = 0.42),
+        axis.text = element_text(color="blue", family="mono", size=9))+
+  scale_y_continuous(limits = c(-15,90),
+                     breaks = seq(from=-15, to=90, by=20)) +
+  scale_x_date(limits=c(as.Date("2016-03-21"), 
+                        as.Date("2016-12-21")),
+               date_breaks = "6 weeks", 
+               date_labels = format("%m/%d"));
+plot(plotData);
+
 
 
 
