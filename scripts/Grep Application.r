@@ -96,15 +96,15 @@ tempNum <- length(classData2$temperatureValues);
 tempValue <- classData2$temperatureValues;
 tempMix <- classData2$tempMix;
 
-# Create a biMonth vector based on dateYr vector
-for(i in 1:tempNum) # go through each date
+# Loop through all temperatures for conversion
+for(i in 1:tempNum) # go through each temperature
 {
-  # if the date falls within Jan and Feb
+  # if the temperature type is celsius degree, convert it
   if(tempMix[i] == "Celsius")
   {
     tempValue[i] = tempValue[i]*(9/5)+32;
   }
-  else # something went wrong... always good to check
+  else # leave the temperature as it is
   {
     tempValue[i] = tempValue[i];
   }
