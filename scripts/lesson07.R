@@ -176,4 +176,43 @@ thePlot = ggplot(data=weatherData) +
 plot(thePlot);
 
 
+### Extension: changing quantile
 
+## Quantile function
+findQuants = function(yVar, xVar, factors, percentile)
+{
+  quants = c();
+  for(i in factors)
+  {
+    quantIndex = which(xVar == i);
+    quants[i] = quantile(yVar[quantIndex], percentile, na.rm=TRUE);
+  }
+  return(quants)
+}
+
+## Calling findQuants()
+#### Extension: Setting quantile values
+lowVal = findQuants(yVar = weatherData$changeMaxTemp,
+                    xVar = weatherData$windDir,
+                    factors = c("North", "East", "South", "West"),
+                    percentile = 0.35);
+
+highVal = findQuants(yVar = weatherData$changeMaxTemp,
+                     xVar = weatherData$windDir,
+                     factors = c("North", "East", "South", "West"),
+                     percentile = 0.65);
+
+## Applying quant values to the plot
+#### Extension: Applying quantile values
+thePlot = ggplot(data=weatherData) +
+  geom_boxplot(mapping=aes(x=windDir, y=changeMaxTemp),
+               na.rm=TRUE,
+               lower=lowVal, 
+               upper=highVal) +
+  scale_x_discrete(limits=c("North", "East", "South", "West")) +
+  theme_bw() +
+  labs(title = "Change in Temperature vs. Wind Direction",
+       subtitle = "Lansing, Michigan: 2016",
+       x = "Wind Direction",
+       y = "Degrees (Fahrenheit)");
+plot(thePlot);
