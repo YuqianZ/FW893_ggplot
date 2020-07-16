@@ -172,6 +172,61 @@ thePlot = ggplot(data=weatherData) +
 plot(thePlot);
 
 
+### One for() for all if-else structures
+for(day in 1:nrow(weatherData))
+{
+  ## Adding a column that gives relative wind speed for the day
+  # Winds less than 6.4 miles/hour -- label as "Low"
+  if(weatherData[day,"windSpeed"] <= windSpeedQuant[1])
+  {
+    weatherData[day,"windSpeedLevel"] = "Low";
+  }
+  # Winds greater than 10.2 miles/hour -- label as "High"
+  else if(weatherData[day,"windSpeed"] >= windSpeedQuant[2])
+  {
+    weatherData[day,"windSpeedLevel"] = "High";
+  }
+  else # wind speeds between 6.4 and 10.2 miles/hour -- label as "Medium"
+  {
+    weatherData[day,"windSpeedLevel"] = "Medium";
+  }
+  
+  ## Adding a column that gives the cardinal wind direction
+  # if the direction is greater than 315 OR less than 45 degrees
+  if(weatherData[day,"windSusDir"] >= 315 ||
+     weatherData[day,"windSusDir"] < 45)
+  {
+    weatherData[day,"windDir"] = "North";
+  }
+  # if the direction is greater than 45 AND less than 135 degrees
+  else if(weatherData[day,"windSusDir"] >= 45 &&
+          weatherData[day,"windSusDir"] < 135)
+  {
+    weatherData[day,"windDir"] = "East";
+  }
+  # if the direction is greater than 135 AND less than 225 degrees
+  else if(weatherData[day,"windSusDir"] >= 135 &&
+          weatherData[day,"windSusDir"] < 225)
+  {
+    weatherData[day,"windDir"] = "South";
+  }
+  else # the directions is between 225 and 315 degrees
+  {
+    weatherData[day,"windDir"] = "West";
+  }
+  ### Adding a changeMaxTemp column
+  if(day == 1)
+  {
+    weatherData[day,"changeMaxTemp"] = NA;
+  }
+  else
+  {
+    weatherData[day,"changeMaxTemp"] = weatherData[day,"maxTemp"] -
+      weatherData[day-1,"maxTemp"];
+  }
+}
+
+
 
 
 
