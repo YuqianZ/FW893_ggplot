@@ -107,32 +107,18 @@ thePlot = ggplot(data=weatherData) +
        y = "Wind Sus Speed");
 plot(thePlot);
 
+
 ## testing ggstatsplot package and functions
 
 library("tidyverse","ggstatsplot")
 
-thePlot = ggplot(data=weatherData) +
-  stat_boxplot(mapping=aes(x=pressureFact, y=windSusSpeed), 
-               na.rm=TRUE,
-               geom = "errorbar",
-               width = 0.2) +
-  geom_boxplot(mapping=aes(x=pressureFact, y=windSusSpeed),
-               outlier.shape = 11,
-               outlier.color = "grey20",
-               outlier.alpha = 0.6,
-               outlier.size = 1.5) +
-  theme_bw() +
-  labs(title = "Wind Sus Speed vs. Pressure Level",
-       subtitle = "Lansing, Michigan: 2016",
-       x = "Pressure Level",
-       y = "Wind Sus Speed") +
-  ggstatsplot::ggbetweenstats(data=weatherData,
-                 x = pressureFact,
+boxplot(windSusSpeed~pressureLevel, data=weatherData)
+ggstatsplot::ggbetweenstats(data=weatherData,
+                 x = pressureLevel,
                  y = windSusSpeed,
                  outlier.tagging = TRUE,
                  outlier.label = dateYr);
 
-plot(thePlot);
 
 
 
