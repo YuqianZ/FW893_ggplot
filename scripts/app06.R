@@ -58,7 +58,7 @@ highOrder = order(highWeatherData$windSusSpeed, decreasing = TRUE)
 lowDates = lowWeatherData$dateYr[lowOrder[1:3]]
 highDates = highWeatherData$dateYr[highOrder[1:3]]
 
-thePlot = ggplot(data=weatherData) +
+thePlotX = ggplot(data=weatherData) +
   stat_boxplot(mapping=aes(x=pressureFact, y=windSusSpeed), 
                na.rm=TRUE,
                geom = "errorbar",
@@ -105,7 +105,16 @@ thePlot = ggplot(data=weatherData) +
        subtitle = "Lansing, Michigan: 2016",
        x = "Pressure Level",
        y = "Wind Sus Speed");
-plot(thePlot);
+plot(thePlotX);
+
+### Get plot data:
+plotData = ggplot_build(thePlotX)$data[[1]];
+
+### Extract outliers from plot data
+outliers = plotData$outliers;
+
+### Outliers from first plot
+firstBoxOut = outliers[[1]];
 
 ## testing ggstatsplot package and functions
 
@@ -127,8 +136,8 @@ thePlot = ggplot(data=weatherData) +
        x = "Pressure Level",
        y = "Wind Sus Speed") +
   ggstatsplot::ggbetweenstats(data=weatherData,
-                 x = pressureFact,
-                 y = windSusSpeed,
+                 x = weatherData$pressureFact,
+                 y = weatherData$windSusSpeed,
                  outlier.tagging = TRUE,
                  outlier.label = dateYr);
 
