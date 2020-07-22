@@ -63,7 +63,7 @@ weatherData$biMonth = biMonth;
 
 # Create a histogram for each biMonth (faceting)
 plotData = ggplot(data=weatherData) +
-  geom_histogram(mapping=aes(x=avgTemp, y=..count..),
+  geom_histogram(mapping=aes(x=relHum, y=..count..),
                  bins=40,
                  color="grey20",
                  fill="darkblue") +
@@ -79,7 +79,7 @@ plot(plotData);
 
 # Create a stacked histogram for each biMonth - Very informative process
 plotData = ggplot(data=weatherData) + 
-  geom_histogram(mapping=aes(x=avgTemp, y=..count.., fill=biMonth),
+  geom_histogram(mapping=aes(x=relHum, y=..count.., fill=biMonth),
                  bins=40,
                  color="grey20",
                  position="stack") +

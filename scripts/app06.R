@@ -121,12 +121,12 @@ firstBoxOut = outliers[[1]];
 
 library("tidyverse","ggstatsplot")
 
-<<<<<<< HEAD
+# <<<<<<< HEAD
 boxplot(windSusSpeed~pressureLevel, data=weatherData)
 ggstatsplot::ggbetweenstats(data=weatherData,
                  x = pressureLevel,
-                 y = windSusSpeed,
-=======
+                 y = windSusSpeed)
+# =======
 thePlot = ggplot(data=weatherData) +
   stat_boxplot(mapping=aes(x=pressureFact, y=windSusSpeed), 
                na.rm=TRUE,
@@ -141,13 +141,13 @@ thePlot = ggplot(data=weatherData) +
   labs(title = "Wind Sus Speed vs. Pressure Level",
        subtitle = "Lansing, Michigan: 2016",
        x = "Pressure Level",
-       y = "Wind Sus Speed") +
-  ggstatsplot::ggbetweenstats(data=weatherData,
+       y = "Wind Sus Speed");
+ggstatsplot::ggbetweenstats(data=weatherData,
                  x = weatherData$pressureFact,
                  y = weatherData$windSusSpeed,
->>>>>>> 3176414339584f80f005c11966b295a28586739f
+# >>>>>>> 3176414339584f80f005c11966b295a28586739f
                  outlier.tagging = TRUE,
-                 outlier.label = dateYr);
+                 outlier.label = dateYr)
 
 
 
