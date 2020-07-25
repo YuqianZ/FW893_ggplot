@@ -67,6 +67,8 @@ thePlot3 = ggplot(data=weatherData) +
        x = "Month");
 plot(thePlot3)
 
-
+#### Issues to resolve
+# 1. Can not personalize colors for filled colors in plot 1 and plot 2
+# 2. Can not combine plot 1 and 2 together
 
 
