@@ -58,6 +58,21 @@
   #    - low: the lowest value in the data greater than the low whisker value
   # 7) Repeat 1-6 for relHum values for days where there is precipitation
   
+  
+  
+  ## Mannually create the boxplot
+  
+  weatherData$relHum[weatherData$precipitation==0] %>% 
+    mean.no.prec <- mean()
+  weatherData$relHum[weatherData$precipitation==0] %>% 
+    median.no.prec <- median()
+  weatherData$relHum[weatherData$precipitation==0] %>% 
+    sd.no.prec <- sd()
+
+  # working in progress...
+
+  
+  
   ##### Manually plot humidity vs precipitation ######
   plot2 = ggplot() +     # no dataframe because the data is being manually entered
     
