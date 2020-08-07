@@ -22,6 +22,7 @@
   
   # merge the two data frame together
   heatCoolByMonth = merge(heatDayList, coolDayList);
+  heatCoolByMonth
   
   # melt the dataframe so it is more GGPlot-friendly
   meltedDF = melt(heatCoolByMonth, id="month");
@@ -47,11 +48,24 @@
   #   5) Extra: add an unofficial legend to the geom_col() plots using annotate()
   #    - the options for geom are: segment, rect, and text
   
-  # months <- unique(weatherData$month)
-  # heatDays <- rep(0,12)
-  # coolDays <- rep(0,12)
-  # 
+  months <- unique(weatherData$month)
+  heatDays <- rep(0,12)
+  coolDays <- rep(0,12)
+  
+  
+  for (i in 1:length(months)){
+    for(j in 1:dim(weatherData)[1]){
+      if (months[i] == weatherData$month[j]){
+        heatDays[i] <- heatDays[i] + weatherData$heatDays[j]
+        coolDays[i] <- coolDays[i] + weatherData$coolDays[j]
+      }
+    }
+  }
 
+  heatCoolByMonth <- cbind(months, heatDays, coolDays)
+  
+  # melt dataframe
+  # ......
   
   ###################################
   #### End of section to replace ####
